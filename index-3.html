@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jamila Gibson — Technical Product Management Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet"/>
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── TOKENS ──
+   Base black/cream/gold pulled directly from lxd-portfolio's :root.
+   --purple added here only: pulled directly from jamilagibson.github.io's
+   dark-mode --accent (#A07AD6), scoped to technical/engineering-lens content
+   so the color-coding itself signals the ID<->SWE bridge, using both real
+   sibling-site accents rather than inventing a third.
+*/
+:root {
+  --black:      #0E0E0E;
+  --cream:      #EDE8DF;
+  --gold:       #C4A97A;
+  --purple:     #A07AD6;
+  --gray:       #9E9E96;
+  --gray-dim:   #777770;
+  --rule:       #2A2A2A;
+  --focus:      #C4A97A;
+}
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.skip-nav {
+  position: absolute; top: -100%; left: 0;
+  background: var(--gold); color: var(--black);
+  padding: 12px 24px;
+  font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
+  text-decoration: none; z-index: 9999; transition: top 0.1s;
+}
+.skip-nav:focus { top: 0; }
+
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible {
+  outline: 2px solid var(--focus); outline-offset: 4px;
+  border-radius: 2px; text-decoration: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--black); border-bottom: 1px solid var(--rule);
+  padding: 16px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.nav-name {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+}
+.nav-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+.nav-links a {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray);
+  transition: color 0.2s; padding: 4px 2px;
+}
+.nav-links a:hover, .nav-links a:focus-visible { color: var(--cream); text-decoration: none; }
+
+/* ── CONTAINERS ── */
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 48px; }
+.section { padding: 100px 0; border-top: 1px solid var(--rule); }
+@media (max-width: 768px) { .wrap { padding: 0 24px; } .section { padding: 64px 0; } }
+
+/* ── TYPOGRAPHY ── */
+.display {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(56px, 9vw, 112px);
+  line-height: 0.92; letter-spacing: 0.01em; text-transform: uppercase;
+  color: var(--cream);
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.4), -1px -1px 0 rgba(255,255,255,0.03);
+}
+.display--mid { font-size: clamp(40px, 6vw, 72px); }
+.display--sm  { font-size: clamp(28px, 4vw, 48px); }
+
+.eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 24px; display: block;
+}
+.eyebrow--bridge { color: var(--purple); }
+
+.body { color: var(--gray); line-height: 1.8; }
+.body p + p { margin-top: 14px; }
+hr { border: none; border-top: 1px solid var(--rule); margin: 48px 0; }
+
+/* ── HERO ── */
+.hero { padding: 140px 0 80px; }
+.hero-tagline { margin-top: 32px; color: var(--gray); font-size: 16px; max-width: 560px; line-height: 1.75; }
+
+/* signature element: the bridge line — literal visual translation between
+   the two sibling sites, rendered in each site's own accent color */
+.bridge {
+  margin-top: 56px; display: flex; align-items: center;
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.bridge-node {
+  padding: 10px 18px; border: 1px solid var(--rule);
+  white-space: nowrap;
+}
+.bridge-node--id { color: var(--gold); border-color: var(--gold); }
+.bridge-node--swe { color: var(--purple); border-color: var(--purple); }
+.bridge-node--mid { background: var(--cream); color: var(--black); font-weight: 700; border: none; }
+.bridge-line {
+  flex: 1; height: 1px; min-width: 24px;
+  background: repeating-linear-gradient(90deg, var(--rule) 0, var(--rule) 4px, transparent 4px, transparent 9px);
+}
+@media (max-width: 640px) {
+  .bridge { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .bridge-line { display: none; }
+}
+
+.hero-links { margin-top: 32px; display: flex; gap: 24px; flex-wrap: wrap; }
+.hero-links a {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 0;
+}
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+.about-statement { font-family: 'Space Grotesk', sans-serif; font-size: 18px; color: var(--cream); line-height: 1.65; }
+.tldr { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px; }
+.tldr-item {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
+  border: 1px solid #333; padding: 5px 12px;
+}
+@media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+/* ── FEATURED CASE STUDY ── */
+.project-featured { margin-top: 0; }
+.project-featured-header {
+  display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 32px;
+  padding-bottom: 40px; border-bottom: 1px solid var(--rule);
+}
+.project-badge {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--black);
+  background: var(--gold); padding: 5px 12px; display: inline-block; margin-bottom: 20px;
+}
+.project-team {
+  font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gray);
+  margin-top: 16px; letter-spacing: 0.04em;
+}
+.project-summary { margin-top: 24px; font-size: 15px; color: var(--gray); line-height: 1.8; max-width: 640px; }
+
+.project-stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  margin: 40px 0;
+}
+.stat { padding: 32px 24px; border-right: 1px solid var(--rule); }
+.stat:last-child { border-right: none; }
+.stat-value { font-family: 'Anton', sans-serif; font-size: 40px; line-height: 1; color: var(--cream); text-shadow: 1px 1px 0 rgba(0,0,0,0.5); }
+.stat-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); margin-top: 8px; line-height: 1.5; }
+@media (max-width: 640px) { .project-stats-row { grid-template-columns: 1fr 1fr; } .stat:nth-child(2) { border-right: none; } }
+
+.flow { display: flex; flex-direction: column; margin-top: 40px; }
+.flow-step { display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+.flow-num { font-family: 'Anton', sans-serif; font-size: 20px; color: var(--rule); padding-top: 2px; }
+.flow-text { font-size: 14px; color: var(--gray); line-height: 1.7; }
+.flow-text strong { color: var(--cream); font-weight: 500; }
+
+.case-links { margin-top: 40px; display: flex; gap: 28px; flex-wrap: wrap; }
+.case-links a { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ── ARTIFACTS GRID ── */
+.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); margin-top: 64px; }
+.project-card { background: var(--black); padding: 48px 40px; }
+.project-card-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; }
+.project-card-label.tag-id { color: var(--gold); }
+.project-card-label.tag-swe { color: var(--purple); }
+.project-card-title { font-family: 'Anton', sans-serif; font-size: 24px; line-height: 1.1; text-transform: uppercase; color: var(--cream); margin-bottom: 16px; text-shadow: 1px 1px 0 rgba(0,0,0,0.5); }
+.project-card-body { font-size: 13px; color: var(--gray); line-height: 1.7; }
+.status-pill {
+  display: inline-block; margin-top: 20px;
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 10px; border: 1px solid var(--rule);
+}
+.status-pill.ready { color: var(--gold); border-color: var(--gold); }
+.status-pill.hypothetical { color: var(--purple); border-color: var(--purple); }
+@media (max-width: 640px) { .projects-grid { grid-template-columns: 1fr; } }
+
+/* ── EXPERTISE ── */
+.expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); margin-top: 64px; }
+.expertise-col { background: var(--black); padding: 48px 36px; }
+.expertise-name { font-family: 'Anton', sans-serif; font-size: 20px; text-transform: uppercase; color: var(--cream); margin-bottom: 24px; text-shadow: 1px 1px 0 rgba(0,0,0,0.5); }
+.expertise-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.expertise-list li { font-size: 13px; color: var(--gray); line-height: 1.5; padding-left: 16px; position: relative; }
+.expertise-list li::before { content: '—'; position: absolute; left: 0; color: var(--rule); }
+@media (max-width: 768px) { .expertise-grid { grid-template-columns: 1fr; } }
+
+/* ── PULL QUOTE ── */
+.pull-quote-section { padding: 100px 0; }
+.pull-quote { font-family: 'Space Grotesk', sans-serif; font-size: clamp(20px, 2.5vw, 28px); font-weight: 300; color: var(--cream); line-height: 1.5; max-width: 760px; }
+.pull-quote em { color: var(--gold); font-style: normal; }
+.pull-quote .swe-em { color: var(--purple); font-style: normal; }
+.quote-attr { margin-top: 24px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gray); letter-spacing: 0.08em; }
+
+/* ── CONTACT ── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.contact-items { display: flex; flex-direction: column; gap: 24px; }
+.contact-item { display: grid; grid-template-columns: 100px 1fr; gap: 16px; align-items: start; }
+.contact-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); padding-top: 2px; }
+.contact-value { font-size: 14px; color: var(--cream); }
+.contact-value a { color: var(--cream); border-bottom: 1px solid var(--rule); }
+.contact-value a:hover { border-color: var(--gold); text-decoration: none; }
+@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+/* ── FOOTER ── */
+footer { border-top: 1px solid var(--rule); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-name { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gray); }
+.footer-note { font-family: 'Space Mono', monospace; font-size: 11px; color: #555; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<nav>
+  <span class="nav-name">Jamila Gibson, Ed.S.</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#case-study">Case Study</a></li>
+    <li><a href="#artifacts">Artifacts</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main id="main-content">
+
+  <section class="hero wrap">
+    <span class="eyebrow">Technical Product Management Portfolio</span>
+    <h1 class="display">Where Content<br/>Meets Code</h1>
+    <p class="hero-tagline">Years spent designing how people learn, a software engineering immersive to understand how systems get built, and product-facing work at McGraw Hill sitting squarely between the two.</p>
+
+    <div class="bridge">
+      <span class="bridge-node bridge-node--id">Instructional Design</span>
+      <span class="bridge-line"></span>
+      <span class="bridge-node bridge-node--mid">TPM</span>
+      <span class="bridge-line"></span>
+      <span class="bridge-node bridge-node--swe">Software Engineering</span>
+    </div>
+
+    <div class="hero-links">
+      <a href="https://jamilagibson.github.io/">SWE Portfolio →</a>
+      <a href="https://jamilagibson.github.io/lxd-portfolio">LXD Portfolio →</a>
+      <a href="https://linkedin.com/in/jamilagibson">LinkedIn</a>
+    </div>
+  </section>
+
+  <section class="section wrap" id="about">
+    <span class="eyebrow">About</span>
+    <div class="about-grid">
+      <div>
+        <p class="about-statement">Technical product management isn't a new direction for me — it's naming work I was already doing.</p>
+      </div>
+      <div>
+        <p class="body">I spent years designing learning experiences before formally training as a software engineer, and I've spent the years since working the seam between the two: first as an Instructional Designer at McGraw Hill, then as a contributor to open-source engineering projects, now pursuing a Technical Product Manager role that makes that translation work my full-time job.</p>
+        <p class="body">The instinct is consistent across both sides: identify the actual bottleneck behind a workflow, scope what a fix should and shouldn't do, and stay close enough to the content and the engineering to know when a solution is real versus when it just looks real.</p>
+        <div class="tldr">
+          <span class="tldr-item">Cross-Functional Alignment</span>
+          <span class="tldr-item">AI-Assisted Workflow Design</span>
+          <span class="tldr-item">Scoping &amp; Prioritization</span>
+          <span class="tldr-item">Data-Informed Decisions</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="case-study">
+    <span class="eyebrow">Featured Case Study</span>
+    <div class="project-featured">
+      <div class="project-featured-header">
+        <div>
+          <span class="project-badge">PX Innovation Week · 12/12 Score · June 2026</span>
+          <h2 class="display display--mid">TE-to-Course<br/>Alignment Accelerator</h2>
+          <div class="project-team">Ranjani Indrajith — PM &nbsp;·&nbsp; Jamila Gibson — Instructional Design</div>
+        </div>
+      </div>
+
+      <p class="project-summary">An AI-assisted workflow that extracts structured lesson-level asset, materials, and component data from Spanish-language Teacher Editions — replacing a 60-hour-per-unit manual alignment process with a verified, QC-ready spreadsheet output in under 15 hours.</p>
+
+      <div class="project-stats-row">
+        <div class="stat"><div class="stat-value">75–85%</div><div class="stat-label">Time Reduction</div></div>
+        <div class="stat"><div class="stat-value">12/12</div><div class="stat-label">Opportunity Score</div></div>
+        <div class="stat"><div class="stat-value">~$18.9K</div><div class="stat-label">Projected Savings</div></div>
+        <div class="stat"><div class="stat-value">K–5</div><div class="stat-label">Program Scale</div></div>
+      </div>
+
+      <div class="flow">
+        <div class="flow-step">
+          <span class="flow-num">01</span>
+          <span class="flow-text"><strong>Diagnosed the root cause</strong> — the CAT tracker meant to bridge TE and course build was cloned from the ELA program and didn't reflect SLA-unique components, forcing manual re-extraction with no reusable output.</span>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">02</span>
+          <span class="flow-text"><strong>Designed the AI-assisted workflow</strong> — prompt engineering and LLM-assisted extraction from TE PDFs into structured, spreadsheet-ready output.</span>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">03</span>
+          <span class="flow-text"><strong>Kept humans in the loop by design</strong> — shifted the team's role from creating extractions to reviewing AI-generated drafts, preserving accuracy under a 9-day deadline.</span>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">04</span>
+          <span class="flow-text"><strong>Scoped what came later</strong> — deferred a custom-built tool until usage data justified it; sequenced the CAT tracker fix after the extraction workflow, not bundled into v1.</span>
+        </div>
+      </div>
+
+      <div class="case-links">
+        <a href="PRD-TE-to-Course-Alignment-Accelerator.md">View Full PRD →</a>
+        <a href="#artifacts">View Related Artifacts ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="artifacts">
+    <span class="eyebrow">Artifacts</span>
+    <p class="body" style="max-width: 640px;">Supporting documents built from the same project, viewed through different TPM lenses. Gold marks documented, delivered work; purple marks a labeled hypothetical extension — a proposed system-design exercise, not part of what actually shipped.</p>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-card-label tag-id">Product Requirements</div>
+        <h3 class="project-card-title"><a href="PRD-TE-to-Course-Alignment-Accelerator.md">Accelerator PRD</a></h3>
+        <p class="project-card-body">Problem, goal, success metrics, stakeholders, requirements, scope, and rollout plan — reconstructed from the delivered Innovation Week project.</p>
+        <span class="status-pill ready">Documented</span>
+      </div>
+      <div class="project-card">
+        <div class="project-card-label tag-id">Product Teardown</div>
+        <h3 class="project-card-title"><a href="Teardown-Manual-Alignment-Process.md">Why the Manual Process Failed</a></h3>
+        <p class="project-card-body">A structural teardown of the pre-Accelerator workflow — why a cloned CAT tracker created a permanent verification tax, not just a slow process.</p>
+        <span class="status-pill ready">Documented</span>
+      </div>
+      <div class="project-card">
+        <div class="project-card-label tag-swe">System Design</div>
+        <h3 class="project-card-title">API Integration Teardown</h3>
+        <p class="project-card-body">How the Accelerator's LLM-based extraction step could be re-architected as a direct API integration rather than a manual prompting workflow.</p>
+        <span class="status-pill hypothetical">Hypothetical Extension</span>
+      </div>
+      <div class="project-card">
+        <div class="project-card-label tag-swe">System Design</div>
+        <h3 class="project-card-title">Database Schema Design</h3>
+        <p class="project-card-body">A proposed data model for TE lessons, course components, and alignment mappings — not part of the delivered v1, which was spreadsheet-based.</p>
+        <span class="status-pill hypothetical">Hypothetical Extension</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="expertise">
+    <span class="eyebrow">What I Bring</span>
+    <div class="expertise-grid">
+      <div class="expertise-col">
+        <div class="expertise-name">Product Thinking</div>
+        <ul class="expertise-list">
+          <li>Problem diagnosis over symptom-fixing</li>
+          <li>Scope definition &amp; sequencing</li>
+          <li>Success metrics tied to real cost models</li>
+          <li>Build-vs-buy scoping decisions</li>
+        </ul>
+      </div>
+      <div class="expertise-col">
+        <div class="expertise-name">Technical Fluency</div>
+        <ul class="expertise-list">
+          <li>AI/LLM-assisted workflow design</li>
+          <li>Full-stack engineering background</li>
+          <li>WCAG 2.2 AA as a spec requirement</li>
+          <li>Cross-functional engineering collaboration</li>
+        </ul>
+      </div>
+      <div class="expertise-col">
+        <div class="expertise-name">Domain Depth</div>
+        <ul class="expertise-list">
+          <li>Bilingual/dual-literacy education</li>
+          <li>K–5 curriculum and content systems</li>
+          <li>Stakeholder alignment across content orgs</li>
+          <li>Agile ceremonies &amp; sprint operations</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="pull-quote-section wrap">
+    <p class="pull-quote">The best product decisions aren't <em>purely technical</em> or <em class="swe-em">purely instructional</em> — they're both. Sitting at that seam is where I do my best work.</p>
+    <div class="quote-attr">— Jamila Gibson, Ed.S. · Technical Product Management</div>
+  </section>
+
+  <section class="section wrap" id="contact">
+    <span class="eyebrow">Get in Touch</span>
+    <div class="contact-grid">
+      <div>
+        <p class="about-statement">Open to Technical Product Manager roles bridging content systems and engineering.</p>
+      </div>
+      <div class="contact-items">
+        <div class="contact-item">
+          <span class="contact-label">Email</span>
+          <span class="contact-value"><a href="mailto:jamila.l.gibson@gmail.com">jamila.l.gibson@gmail.com</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value"><a href="https://linkedin.com/in/jamilagibson">linkedin.com/in/jamilagibson</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Also See</span>
+          <span class="contact-value">
+            <a href="https://jamilagibson.github.io/">SWE Portfolio →</a><br/>
+            <a href="https://jamilagibson.github.io/lxd-portfolio">LXD Portfolio →</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="footer-name">Jamila Gibson, Ed.S. · Technical Product Management © 2026</span>
+  <span class="footer-note">Tokens sourced from lxd-portfolio &amp; jamilagibson.github.io</span>
+</footer>
+
+</body>
+</html>
